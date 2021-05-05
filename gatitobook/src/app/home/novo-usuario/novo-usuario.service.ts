@@ -17,4 +17,8 @@ export class NovoUsuarioService {
     return this.http.post(`${URL_API}/user/signup`, novoUsuario)
   }
 
+  verificaUsuario(novoUsuario: string) {
+    return this.http.get(`${URL_API}/user/exists/${novoUsuario}`)
+  }
+
 }
