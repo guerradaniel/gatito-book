@@ -1,26 +1,31 @@
 <h4 class="text-center">Registre-se e mostre seu pet ao mundo!</h4>
-<form class="form mt-4" [formGroup]="novoUsuarioForm" (submit)="cadastrar()">
+
+
+<form [formGroup]="novoUsuarioForm" class="form mt-4" (submit)="cadastrar()">
   <div class="form-group">
 
-    <input formControlName="email" type="text" placeholder="E-mail" class="form-control">
+    <!-- E-mail -->
+    <input formControlName="email" name="email" type="text" placeholder="E-mail" class="form-control">
     <app-mensagem mensagem="E-mail obrigatório"
       *ngIf="novoUsuarioForm.get('email')?.errors?.required && novoUsuarioForm.get('email')?.touched">
     </app-mensagem>
-    <app-mensagem mensagem="E-mail inválido"
+    <app-mensagem mensagem="E-mail no formato incorreto"
       *ngIf="novoUsuarioForm.get('email')?.errors?.email && novoUsuarioForm.get('email')?.touched">
     </app-mensagem>
   </div>
 
+  <!-- Nome completo -->
   <div class="form-group">
-    <input formControlName="fullName" type="text" placeholder="Nome completo" class="form-control">
-    <!-- <app-mensagem mensagem="Nome incorreto" *ngIf="novoUsuarioForm.get('fullName')?.errors">
-    </app-mensagem> -->
-    <app-mensagem mensagem="Nome obrigatório" *ngIf="novoUsuarioForm.get('fullName')?.touched"></app-mensagem>
+    <input formControlName="fullName" name="fullName" type="text" placeholder="Nome completo" class="form-control">
+    <app-mensagem mensagem="Nome obrigatório"
+      *ngIf="novoUsuarioForm.get('fullName')?.errors && novoUsuarioForm.get('fullName')?.touched">
+    </app-mensagem>
 
   </div>
 
+  <!-- Usuário -->
   <div class="form-group">
-    <input class="form-control" formControlName="userName" type="text" placeholder="Usuário">
+    <input class="form-control" name="userName" formControlName="userName" type="text" placeholder="Usuário">
     <app-mensagem mensagem="Usuário deve ter apenas letras minúsculas"
       *ngIf="novoUsuarioForm.get('userName')?.errors?.minusculo && novoUsuarioForm.get('userName')?.touched">
     </app-mensagem>
@@ -29,12 +34,12 @@
   </div>
 
   <div class="form-group">
-    <input class="form-control" formControlName="password" type="password" placeholder="Senha">
+    <input class="form-control" name="password" formControlName="password" type="password" placeholder="Senha">
     <app-mensagem mensagem="Senha deve ser diferente do usuário" *ngIf="novoUsuarioForm.errors?.senhaIgualUsuario">
     </app-mensagem>
   </div>
 
-  <button class="btn btn-primary btn-block"> Cadastro</button>
+  <button type="submit" [disabled]="novoUsuarioForm.invalid" class="btn btn-primary btn-block">Cadastrar</button>
 </form>
 
 <div class="mt-3">

@@ -15,8 +15,8 @@ import { NovoUsuarioComponent } from './novo-usuario/novo-usuario.component';
     CommonModule,
     HomeRoutingModule,
     FormsModule,
-    MensagemModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MensagemModule
   ],
   exports: [
     HomeComponent
