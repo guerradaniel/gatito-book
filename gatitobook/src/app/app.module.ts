@@ -5,6 +5,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
+import { RodapeComponent } from './componentes/rodape/rodape.component';
+import { CabecalhoModule } from './componentes/cabecalho/cabecalho.module';
+import { RodapeModule } from './componentes/rodape/rodape.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +16,9 @@ import { HomeModule } from './home/home.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    CabecalhoModule,
+    RodapeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
