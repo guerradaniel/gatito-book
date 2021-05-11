@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
+import { environment } from 'src/environments/environment';
 import { NovoUsuario } from './novo-usuario';
 
-const URL_API = 'http://localhost:3000'
+const URL_API = environment.url_api
 
 @Injectable({
   providedIn: 'root'
