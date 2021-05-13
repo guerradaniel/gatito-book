@@ -9,7 +9,11 @@ import { GradeFotosAnimaisComponent } from './grade-fotos-animais/grade-fotos-an
 
 
 @NgModule({
-  declarations: [ListaAnimaisComponent, AnimalComponent, GradeFotosAnimaisComponent],
+  declarations: [
+    ListaAnimaisComponent,
+    AnimalComponent,
+    GradeFotosAnimaisComponent
+  ],
   imports: [
     CommonModule,
     AnimaisRoutingModule,
