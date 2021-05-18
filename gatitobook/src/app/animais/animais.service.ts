@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { TokenService } from '../autenticacao/token.service';
-import { Animais } from './animais';
+import { Animais, Animal } from './animais';
 
 const URL_API = environment.url_api
 
@@ -24,6 +24,16 @@ export class AnimaisService {
       headers
     })
   }
+
+  buscaPorId(id: number): Observable<Animal> {
+    const token = this.token.retornaToken()
+    const headers = new HttpHeaders().append('x-access-token', token)
+    return this.http.get<Animal>(`${URL_API}/photos/${id}`, {
+      headers
+    })
+  }
+
+
 }
 
 // Este é um serviço que consulta informações
