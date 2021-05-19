@@ -8,6 +8,8 @@ import { HomeModule } from './home/home.module';
 import { RodapeComponent } from './componentes/rodape/rodape.component';
 import { CabecalhoModule } from './componentes/cabecalho/cabecalho.module';
 import { RodapeModule } from './componentes/rodape/rodape.module';
+import { AutenticacaoInterceptor } from './autenticacao/autenticacao.interceptor';
+import { AutenticacaoModule } from './autenticacao/autenticacao.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { RodapeModule } from './componentes/rodape/rodape.module';
     AppRoutingModule,
     HttpClientModule,
     CabecalhoModule,
-    RodapeModule
+    RodapeModule,
+    AutenticacaoModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-  HttpHeaders
+  HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpHeaders
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TokenService } from './token.service';
@@ -38,5 +34,9 @@ export class AutenticacaoInterceptor implements HttpInterceptor {
   O método intercept recebe uma requisição que é imutável. Para alterar o
   objeto eu preciso fazer um clone do mesmo e inserir a informação adicional.
   Em 'next.handle(resquest)', a requisição continua com o request alterado.
+
+  Para que o interceptor funcione é necessário reegistrá-lo em um module. Neste
+  caso, inseri em autenticacao.module. Também será necessário declarar em
+  app.module.
 
 */
