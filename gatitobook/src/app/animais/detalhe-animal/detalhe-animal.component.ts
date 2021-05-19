@@ -28,7 +28,7 @@ export class DetalheAnimalComponent implements OnInit {
 }
 
 /*
-  O component será dinâmico a partir da rora utilizada. Para pegar o Id do
+  O component será dinâmico a partir da rota utilizada. Para pegar o Id do
   animal e passar para o servico usamos o service padrão ActivatedRoute.
 
   O Typescript não dá autocomplete pelo fato de o que foi definido na rota
