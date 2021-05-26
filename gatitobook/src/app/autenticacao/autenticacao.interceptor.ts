@@ -37,6 +37,6 @@ export class AutenticacaoInterceptor implements HttpInterceptor {
 
   Para que o interceptor funcione é necessário reegistrá-lo em um module. Neste
   caso, inseri em autenticacao.module. Também será necessário declarar em
-  app.module.
+  app.module usando-o como um provider.
 
 */

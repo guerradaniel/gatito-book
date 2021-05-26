@@ -1,12 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, mapTo } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 import { TokenService } from '../autenticacao/token.service';
 import { Animais, Animal } from './animais';
 
 const URL_API = environment.url_api
+const NOT_MODIFIED = '304'
+
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +33,22 @@ export class AnimaisService {
     return this.http.get<Animal>(`${URL_API}/photos/${id}`)
   }
 
+  excluiAnimal(id: number): Observable<Animal> {
+    return this.http.delete<Animal>(`${URL_API}/photos/${id}`)
+  }
+
+  curtirAnimal(id: number): Observable<boolean> {
+    return this.http.post(`${URL_API}/photos/${id}/like`,   //rota
+      {}, //body 
+      { observe: 'response' } //passa response inteira e usado para ver o status
+    ).pipe(
+      mapTo(true), // sempre emitirá o valor passado por parâmetro
+      catchError((erro) => { // só executa essa função se apresentar erro
+        return erro.status == NOT_MODIFIED ? of(false) : throwError(erro) // tratamento do erro
+      })
+    )
+  }
+
 }
 
 /*
@@ -41,6 +60,13 @@ export class AnimaisService {
   Em listaDoUsuario() há um trecho de código comentado que indica a maneira
   antiga de declarar o token e o header na função. Ela não será necessária
   pois o Interceptor de Autenticacao já faz isso de forma transparente
-  declarado no médulo da aplicação.
+  declarado no módulo da aplicação.
+
+  Junto ao back-end preciso tratar as requests 200 ou 304 (caso já tenha
+  sido curtido). Para isso é necessário retornar um boolean (true ou false).
+  O HttpClient passa por padrão apenas o body da request no método post e
+  neste caso queremos o status da request (3o param). O mapTo retorna true
+  como parâmetro quando o valor emitido na response for success e o catchError
+  só executará quando der um erro.
 
 */
