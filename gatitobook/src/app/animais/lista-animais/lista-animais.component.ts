@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -13,37 +14,44 @@ import { AnimaisService } from '../animais.service';
 })
 export class ListaAnimaisComponent implements OnInit {
 
-  animais$!: Observable<Animais>
+  animais!: Animais
+  // animais$: Observable<Animais>
 
   constructor(
-    private usuarioService: UsuarioService, // pega infos de users logados
-    private animaisService: AnimaisService // atribui animais para grade
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    // Primeiro exemplo sem usar observable
-    // this.usuarioService.retornaUsuario().subscribe((usuario) => {
-    //   const userName = usuario.name ?? ''
-    //   this.animaisService.listaDoUsuario(userName).subscribe((animais) => {
-    //     this.animais = animais
-    //   })
-    // })
 
-    this.animais$ = this.usuarioService.retornaUsuario().pipe(
-      switchMap((usuario) => {
-        const userName = usuario.name ?? ''
-        return this.animaisService.listaDoUsuario(userName)
-      })
-    )
+    this.activatedRoute.params.subscribe(param => {
+      this.animais = this.activatedRoute.snapshot.data['animais']
+    })
+
   }
-
 }
 
 
-// em "?? ''", atribui '' se for undefined ou nulo
-
-// o switchMap é utilizado para mudar fluxo. Até então o fluxo de dados vinha
-// de usuárioService. Para retornar os animais, precisamos de dados baseados
-// no usuarioService. Para isso é necessário retorná-lo no parâmetro definido
-// como usuario. 
-
+/**
+ * Ao declarar "?? ''", atribui '' se for undefined ou nulo
+ *
+ * O switchMap é utilizado para mudar fluxo. Até então o fluxo de dados vinha
+ * de usuárioService. Para retornar os animais, precisamos de dados baseados
+ * no usuarioService. Para isso é necessário retorná-lo no parâmetro definido
+ * como usuario.
+ *
+ * A variável animais$: Observable<Animais> fazia a atribuição para listagem
+ * dos animais no component. Também usava o AnimaisService e UsuarioService
+ * no constructor, mas quem fará o uso dela será o resolver. No cenário atual
+ * a variável animais jpa receberá o dado tratado pelo nosso resolver.
+ *
+ *
+ *
+    //   Primeiro exemplo sem usar observable no ngOnInit()
+    //   this.usuarioService.retornaUsuario().subscribe((usuario) => {
+    //   const userName = usuario.name ?? ''
+    //   this.animaisService.listaDoUsuario(userName).subscribe((animais) => {
+    //   this.animais = animais
+    //   })
+    // })
+ *
+ */

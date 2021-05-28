@@ -10,6 +10,14 @@
         <i class="fa fa-comment-o fa-2x mr-2 ml-2 cursor-pointer">{{animal.comments}}</i>
         <i (click)="excluir()" class="fa fa-trash-o fa-2x pull-right cursor-pointer"></i>
       </small>
+      <app-comentarios [id]="animalId" *ngIf="animal.allowComments; else warning"></app-comentarios>
+      <ng-template #warning>
+        <p>usuário não pode comentar.</p>
+      </ng-template>
     </div>
   </div>
 </div>
+
+<!--
+  Foi utilizado o ngTemplate para casos em que a foto não habilita o textarea.
+-->

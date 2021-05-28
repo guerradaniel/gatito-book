@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-mensagem',
@@ -8,10 +9,18 @@ import { Component, Input, OnInit } from '@angular/core';
 export class MensagemComponent implements OnInit {
 
   @Input() mensagem = ''
+  form?: FormGroup
 
-  constructor() { }
+
+  constructor(
+    private formBuilder: FormBuilder
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  createForm() {
+
   }
 
 }
