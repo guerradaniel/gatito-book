@@ -1,0 +1,24 @@
+<div [ngClass]="{'active-menu': mostraMenu}">
+  <div class="menu-bar">
+    <i class="fa fa-window-close" (click)="abreMenu()" (keyup.space)="abreMenu()"></i>
+    <ng-content></ng-content>
+  </div>
+
+  <div class="overlay" (click)="abreMenu()"></div>
+</div>
+
+<!-- 
+    Como acionar a classe de animação neste componente? Poderia ser usado
+    uma diretiva *ngIf por exemplo, mas o angular tem uma diretiva para 
+    controalar classes CSS chamada ngClass. Ela recebe um objeto que 
+    funcionam como condicionais (um switch, por exemplo). No caso da 
+    primeira linha, queremos que a class active-menu apareça de acordo com
+    a variável mostraMenu. Se a variável for true, essa classe está na div.  
+
+    (keyup.space) é uma diretiva que, ao apertar a tecla espaço executa uma 
+    determinada ação.  
+
+    Para projetar o conteúdo de um component dentro de outro component, 
+    usamos a tag ng-content. 
+
+ -->

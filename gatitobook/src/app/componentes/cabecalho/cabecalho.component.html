@@ -1,6 +1,17 @@
 <header class="sticky-top">
   <nav class="navbar navbar-light bg-white">
-    <a class="navbar-brand">Gatito Book</a>
+    <a class="navbar-brand">
+      <i class="fa fa-bars mr-2" (click)="menu.abreMenu()" (keyup.space)="menu.abreMenu()"></i>
+      Gatito Book</a>
+
+    <app-menu #menu>
+      <ul class="list-unstyled">
+        <li>
+          <a [routerLink]="['animais', 'novo']">Novo Animal</a>
+        </li>
+      </ul>
+    </app-menu>
+
     <div *ngIf="user$ | async as user">
       <div *ngIf="user.name; else login">
         <i class="fa fa-user mr-2 text-primary"></i>
@@ -17,3 +28,12 @@
   </ng-template>
 
 </header>
+
+
+<!-- 
+  Neste template foi usado um outro componente de app-menu e para que meu
+  ícone de menu funcione trazendo uma referência, foi criado uma diretiva
+  de referência '#menu' que faz a referência para a função que existe
+  dentro do componente para que, ao clicar no ícone, ele possa ser aberto
+  corretamente. 
+ -->

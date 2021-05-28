@@ -1,11 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 
-import { UsuarioService } from 'src/app/autenticacao/usuario/usuario.service';
 import { Animais } from '../animais';
-import { AnimaisService } from '../animais.service';
 
 @Component({
   selector: 'app-lista-animais',
@@ -23,7 +19,7 @@ export class ListaAnimaisComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.activatedRoute.params.subscribe(param => {
+    this.activatedRoute.params.subscribe(() => {
       this.animais = this.activatedRoute.snapshot.data['animais']
     })
 
