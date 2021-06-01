@@ -66,7 +66,24 @@ export class NovoAnimalComponent implements OnInit {
 
 /**
  *
+ * O gravaArquivo pega o arquivo e o carrega para fazer o preview.
+ * Na primeira linha temos o código:
+ *  const file = arquivo?.files[0]
+*    // O input tipo file não retorna um array, pois como ele possibilita
+*    // retornar múltiplos arquivos, ele retora 1 array de files.
  *
+ * O método upload subirá a foto para a API. Ele recebe como parâmetro a
+ * descrição, o allowComments e o arquivo tipo file que foi gravada usando
+ * a instancia FileReader. Usamos um pipe pois o Observable não me trará o
+ * objeto concluído . A cada passo da requisiçaõ ele devolverá a requisição.
+ * Porante precisarei ler esse observable. Usamos o finalize que dirá "quando
+ * finalizar a requisição, o que acontecerá?". Neste caso irá para a tela de
+ * animais com a foto já inclusa.
  *
+ * Ainda neste método foi definido que queremos observar cada um os passos
+ * da requisição. O subscribe executará o tempo todo enquanto a foto sobe.
+ * Ele recebe o evento como parâmetro do tipo HttpEvent. Há uma condição para
+ * que se o evento (event.type) ainda estiver fazendo upload (HttpEventType
+ * .UploadProgress) calculará o percentual.
  *
  */
