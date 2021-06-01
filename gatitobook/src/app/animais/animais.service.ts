@@ -49,6 +49,21 @@ export class AnimaisService {
     )
   }
 
+  upload(descricao: string, permiteComentario: boolean, arquivo: File) { // retorna Observable
+    const formData = new FormData()
+    // Empacota em um Objeto JS com arquivos binários. 
+    formData.append('description', descricao)
+    formData.append('allowComments', permiteComentario ? 'true' : 'false')
+    formData.append('imageFile', arquivo)
+
+    // Monitorar o progresso da requisição (objeto)
+    return this.http.post(`${URL_API}/photos/upload`, formData, {
+      observe: 'events',
+      reportProgress: true //  
+    })
+
+  }
+
 }
 
 /*
@@ -62,11 +77,19 @@ export class AnimaisService {
   pois o Interceptor de Autenticacao já faz isso de forma transparente
   declarado no módulo da aplicação.
 
-  Junto ao back-end preciso tratar as requests 200 ou 304 (caso já tenha
-  sido curtido). Para isso é necessário retornar um boolean (true ou false).
-  O HttpClient passa por padrão apenas o body da request no método post e
-  neste caso queremos o status da request (3o param). O mapTo retorna true
-  como parâmetro quando o valor emitido na response for success e o catchError
-  só executará quando der um erro.
+  No método curtir, junto ao back-end preciso tratar as requests 200 ou 304
+  (caso já tenha sido curtido). Para isso é necessário retornar um boolean
+  (true ou false). O HttpClient passa por padrão apenas o body da request no
+  método post e neste caso queremos o status da request (3o param). O mapTo
+  retorna true como parâmetro quando o valor emitido na response for success
+  e o catchError só executará quando der um erro.
+
+  No método upload, para que eu consiga subir as imagens é necessário
+  empacotar o arquivo em um objeto js chamado FormData. Os primeiros parâmetros
+  do post desse objeto são os que o back-end está esperando. Como estamos em um
+  Observable, o Angular fará um next mandando em que etapa está a requisição.
+  Em nosso componente podemos obersavar isso com subscribe e mostrar isso para
+  o usuário.
+
 
 */
